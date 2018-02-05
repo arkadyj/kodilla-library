@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,28 +16,27 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "TITLES")
-public class Title {
+public class Rent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "rentDate")
+    private LocalDate rentDate;
 
-    @Column(name = "author")
-    private String author;
+    @Column(name = "returnDate")
+    private LocalDate returnDate;
 
-    @Column(name="publishYear")
-    private String publishYear;
-/*
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "TITLE_ID")
+    @JoinColumn(name = "BOOK_ID")
     private List<Book> books = new ArrayList<>();
-*/
-    public Title (String title, String author, String publishYear) {
-        this.title=title;
-        this.author=author;
-        this.publishYear=publishYear;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Reader reader;
+
+    public Rent(LocalDate rentDate, LocalDate returnDate) {
+        this.rentDate = rentDate;
+        this.returnDate = returnDate;
     }
 }

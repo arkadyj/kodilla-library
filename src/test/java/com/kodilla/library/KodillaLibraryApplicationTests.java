@@ -1,8 +1,12 @@
 package com.kodilla.library;
 
+import com.kodilla.library.domain.Book;
 import com.kodilla.library.domain.Reader;
+import com.kodilla.library.domain.Rent;
 import com.kodilla.library.domain.Title;
+import com.kodilla.library.repository.BookRepository;
 import com.kodilla.library.repository.ReaderRepository;
+import com.kodilla.library.repository.RentRespository;
 import com.kodilla.library.repository.TitleRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +25,10 @@ public class KodillaLibraryApplicationTests {
 	private ReaderRepository readerRepository;
 	@Autowired
 	private TitleRepository titleRepository;
+	@Autowired
+	private BookRepository bookRepository;
+	@Autowired
+	private RentRespository rentRespository;
 
 
 
@@ -28,12 +36,21 @@ public class KodillaLibraryApplicationTests {
 	public void testReaderSave() {
 		//Given
 
-		//Reader reader = new Reader("Arek", "Szelag", LocalDateTime.now());
+		Reader reader = new Reader("Arek", "Szelag", LocalDateTime.now());
 		Title title = new Title("Nieustraszony", "Stanisław Lem", "1950");
+		Book book = new Book("WOLNA");
+		Rent rent = new Rent(LocalDate.now().minusDays(5),LocalDate.now());
 
 		//When
 		//readerRepository.save(reader);
-		titleRepository.save(title);
+		book.setTitle(title);
+		//bookRepository.save(book);
+
+		rent.setReader(reader);
+		rent.getBooks().add(book);
+		//rent.setBook(book);
+
+		rentRespository.save(rent);
 
 		//Then
 	}

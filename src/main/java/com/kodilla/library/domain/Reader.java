@@ -30,11 +30,17 @@ public class Reader {
     @Column(name="createdate")
     private LocalDateTime createDate;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "RENT_ID")
+    private Rent rent;
+
     public Reader (String fname, String sname, LocalDateTime createDate) {
         this.fname=fname;
         this.sname=sname;
         this.createDate=createDate;
     }
+
+
 
 
 }

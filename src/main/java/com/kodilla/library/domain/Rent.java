@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "TITLES")
+@Table(name = "RENTS")
 public class Rent {
 
     @Id
@@ -28,11 +28,27 @@ public class Rent {
     @Column(name = "returnDate")
     private LocalDate returnDate;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BOOK_ID")
-    private List<Book> books = new ArrayList<>();
+    private Book book;
+    /*@OneToMany(
+            targetEntity = Book.class,
+            mappedBy = "Book",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    ) */
+    //@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@JoinColumn(name = "BOOKS")
+    //private Book books;
+
+    //@Column(name="RENT_ID")
+    //private Long book_id;
+
+
+    //private List<Book> books = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "READER_ID")
     private Reader reader;
 
     public Rent(LocalDate rentDate, LocalDate returnDate) {

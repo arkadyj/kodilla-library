@@ -45,11 +45,16 @@ public class KodillaLibraryApplicationTests {
 		//readerRepository.save(reader);
 		book.setTitle(title);
 		//bookRepository.save(book);
-
 		rent.setReader(reader);
-		rent.getBooks().add(book);
-		//rent.setBook(book);
+		book.getRent().add(rent);
+		//rent.getBooks().add(book);
 
+
+		//rent.setBook(book);
+		//rent.getBooks().add(book);
+		//rent.setBook(book);
+		bookRepository.save(book);
+		//titleRepository.save(title);
 		rentRespository.save(rent);
 
 		//Then

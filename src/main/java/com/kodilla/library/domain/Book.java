@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,6 +27,13 @@ public class Book {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "TITLE_ID")
     private Title title;
+
+    //@Column(name="BOOK_ID")
+    //private Long book_id;
+
+    @OneToMany(mappedBy = "book")
+    //@JoinColumn(name="RENT_ID", referencedColumnName="ID")
+    private List<Rent> rent = new ArrayList<>();
 
     public Book(String status) {
         this.status = status;

@@ -46,9 +46,9 @@ public class KodillaLibraryApplicationTests {
 		book.setTitle(title);
 		//bookRepository.save(book);
 		rent.setReader(reader);
+		rent.setBook(book);
 		book.getRent().add(rent);
 		//rent.getBooks().add(book);
-
 
 		//rent.setBook(book);
 		//rent.getBooks().add(book);

@@ -28,9 +28,6 @@ public class Book {
     @JoinColumn(name = "TITLE_ID")
     private Title title;
 
-    //@Column(name="BOOK_ID")
-    //private Long book_id;
-
     @OneToMany(mappedBy = "book")
     //@JoinColumn(name="RENT_ID", referencedColumnName="ID")
     private List<Rent> rent = new ArrayList<>();

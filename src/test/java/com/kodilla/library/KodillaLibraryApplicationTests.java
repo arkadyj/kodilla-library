@@ -22,15 +22,9 @@ import java.time.LocalDateTime;
 public class KodillaLibraryApplicationTests {
 
 	@Autowired
-	private ReaderRepository readerRepository;
-	@Autowired
-	private TitleRepository titleRepository;
-	@Autowired
 	private BookRepository bookRepository;
 	@Autowired
 	private RentRespository rentRespository;
-
-
 
 	@Test
 	public void testReaderSave() {
@@ -42,26 +36,15 @@ public class KodillaLibraryApplicationTests {
 		Rent rent = new Rent(LocalDate.now().minusDays(5),LocalDate.now());
 
 		//When
-		//readerRepository.save(reader);
+
 		book.setTitle(title);
-		//bookRepository.save(book);
 		rent.setReader(reader);
 		rent.setBook(book);
 		book.getRent().add(rent);
-		//rent.getBooks().add(book);
 
-		//rent.setBook(book);
-		//rent.getBooks().add(book);
-		//rent.setBook(book);
 		bookRepository.save(book);
-		//titleRepository.save(title);
 		rentRespository.save(rent);
 
 		//Then
 	}
-
-	@Test
-	public void contextLoads() {
-	}
-
 }

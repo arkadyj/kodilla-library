@@ -6,9 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,11 +27,7 @@ public class Title {
 
     @Column(name="publishYear")
     private String publishYear;
-/*
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "TITLE_ID")
-    private List<Book> books = new ArrayList<>();
-*/
+
     public Title (String title, String author, String publishYear) {
         this.title=title;
         this.author=author;

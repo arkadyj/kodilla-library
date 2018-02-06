@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,9 +28,6 @@ public class Reader {
 
     @Column(name="createdate")
     private LocalDateTime createDate;
-
-    //@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //private Rent rent;
 
     public Reader (String fname, String sname, LocalDateTime createDate) {
         this.fname=fname;

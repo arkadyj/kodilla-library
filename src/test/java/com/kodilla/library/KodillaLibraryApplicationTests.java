@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,18 +26,19 @@ public class KodillaLibraryApplicationTests {
 	private BookRepository bookRepository;
 	@Autowired
 	private RentRespository rentRespository;
+	@Autowired
+	private ReaderRepository readerRepository;
 
 	@Test
 	public void testReaderSave() {
 		//Given
-
-		Reader reader = new Reader("Arek", "Szelag", LocalDateTime.now());
+		Reader reader = new Reader("Arek", "Szelag", LocalDate.now());
 		Title title = new Title("Nieustraszony", "Stanisław Lem", "1950");
 		Book book = new Book("WOLNA");
 		Rent rent = new Rent(LocalDate.now().minusDays(5),LocalDate.now());
-
+		System.out.println(LocalDate.now());
 		//When
-
+		// Do testów bazy
 		book.setTitle(title);
 		rent.setReader(reader);
 		rent.setBook(book);
@@ -44,6 +46,8 @@ public class KodillaLibraryApplicationTests {
 
 		bookRepository.save(book);
 		rentRespository.save(rent);
+
+
 
 		//Then
 	}

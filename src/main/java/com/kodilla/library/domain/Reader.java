@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +28,9 @@ public class Reader {
     private String sname;
 
     @Column(name="createdate")
-    private LocalDateTime createDate;
+    private LocalDate createDate;
 
-    public Reader (String fname, String sname, LocalDateTime createDate) {
+    public Reader (String fname, String sname, LocalDate createDate) {
         this.fname=fname;
         this.sname=sname;
         this.createDate=createDate;

@@ -36,7 +36,13 @@ public class Reader {
         this.createDate=createDate;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Reader{" +
+                "id=" + id +
+                ", fname='" + fname + '\'' +
+                ", sname='" + sname + '\'' +
+                ", createDate=" + createDate +
+                '}';
+    }
 }

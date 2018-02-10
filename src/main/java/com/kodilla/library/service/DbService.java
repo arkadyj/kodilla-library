@@ -16,4 +16,8 @@ public class DbService {
     public List<Reader> getAllReaders() {
         return readerRepository.findAll();
     }
+
+    public Reader getReader(Long id) {
+        return readerRepository.findById(id);
+    }
 }

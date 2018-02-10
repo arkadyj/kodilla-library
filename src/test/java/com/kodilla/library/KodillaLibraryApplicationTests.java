@@ -39,10 +39,16 @@ public class KodillaLibraryApplicationTests {
 		System.out.println(LocalDate.now());
 		//When
 		// Do testów bazy
+
+		System.out.println(readerRepository.findById(1L));
+		Reader reader1 = readerRepository.findById(1L);
+
 		book.setTitle(title);
-		rent.setReader(reader);
+
 		rent.setBook(book);
+		rent.setReader(reader);
 		book.getRent().add(rent);
+
 
 		bookRepository.save(book);
 		rentRespository.save(rent);

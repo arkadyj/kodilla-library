@@ -15,4 +15,13 @@ public class ReaderDto {
     private String sname;
     private LocalDate createDate;
 
+    @Override
+    public String toString() {
+        return "ReaderDto{" +
+                "id=" + id +
+                ", fname='" + fname + '\'' +
+                ", sname='" + sname + '\'' +
+                ", createDate=" + createDate +
+                '}' + "\n";
+    }
 }

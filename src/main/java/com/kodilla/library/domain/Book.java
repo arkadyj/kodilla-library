@@ -24,15 +24,28 @@ public class Book {
     @Column(name = "status")
     private String status;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "TITLE_ID")
     private Title title;
 
-    @OneToMany(mappedBy = "book")
-    //@JoinColumn(name="RENT_ID", referencedColumnName="ID")
-    private List<Rent> rent = new ArrayList<>();
+    @OneToMany(
+            targetEntity = Rent.class,
+            mappedBy = "book",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
+    private List<Rent> rents = new ArrayList<>();
 
     public Book(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", title=" + title.getTitle() +
+                '}';
     }
 }

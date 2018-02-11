@@ -28,16 +28,33 @@ public class Rent {
     @Column(name = "returnDate")
     private LocalDate returnDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "BOOK_ID")
     private Book book;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "READER_ID")
     private Reader reader;
 
     public Rent(LocalDate rentDate, LocalDate returnDate) {
         this.rentDate = rentDate;
         this.returnDate = returnDate;
+    }
+
+    public Rent(long id, LocalDate rentDate, LocalDate returnDate) {
+        this.id = id;
+        this.rentDate = rentDate;
+        this.returnDate = returnDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Rent{" +
+                "id=" + id +
+                ", rentDate=" + rentDate +
+                ", returnDate=" + returnDate +
+                ", book=" + book +
+                ", reader=" + reader +
+                '}'+"\n";
     }
 }

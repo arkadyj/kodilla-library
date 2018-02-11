@@ -8,6 +8,7 @@ import com.kodilla.library.repository.BookRepository;
 import com.kodilla.library.repository.ReaderRepository;
 import com.kodilla.library.repository.RentRespository;
 import com.kodilla.library.repository.TitleRepository;
+import com.kodilla.library.service.DbService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +29,57 @@ public class KodillaLibraryApplicationTests {
 	private RentRespository rentRespository;
 	@Autowired
 	private ReaderRepository readerRepository;
+	@Autowired
+	private TitleRepository titleRepository;
+	@Autowired
+	private DbService dbService;
 
 	@Test
 	public void testReaderSave() {
 		//Given
-		Reader reader = new Reader("Arek", "Szelag", LocalDate.now());
-		Title title = new Title("Nieustraszony", "Stanisław Lem", "1950");
+		Reader reader = new Reader("Dare", "Kozłowski", LocalDate.now());
+		Title title = new Title("Bajki Robotów", "Stanisław Lem", "1955");
 		Book book = new Book("WOLNA");
 		Rent rent = new Rent(LocalDate.now().minusDays(5),LocalDate.now());
-		System.out.println(LocalDate.now());
+		//System.out.println(LocalDate.now());
 		//When
 		// Do testów bazy
 
+		titleRepository.save(title);
+
+		//System.out.println(dbService.getTitle(1L));
+		Title title1 = dbService.getTitle(3L);
+		System.out.println(title1);
+
+		title1.getBooks().add(book);
+		book.setTitle(title1);
+		bookRepository.save(book);
+
+		readerRepository.save(reader);
+
+		Book book1 = dbService.getBook(3L);
+		Reader reader1 = dbService.getReader(3L);
+
+		reader1.getRents().add(rent);
+		book1.getRents().add(rent);
+		rent.setReader(reader1);
+		rent.setBook(book1);
+		rentRespository.save(rent);
+
+		System.out.println(reader1.getRents());
+
+
+
+		//Book book1 = bookRepository.findById(1L);
+
+		//
+		//
+
+
+		//bookRepository.save(book1);
+
+
+		/*
 		System.out.println(readerRepository.findById(1L));
 		Reader reader1 = readerRepository.findById(1L);
 
@@ -52,7 +92,7 @@ public class KodillaLibraryApplicationTests {
 
 		bookRepository.save(book);
 		rentRespository.save(rent);
-
+*/
 
 
 		//Then

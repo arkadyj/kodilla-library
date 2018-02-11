@@ -9,4 +9,6 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface TitleRepository extends CrudRepository<Title, Long> {
+
+    Title findById (Long id);
 }

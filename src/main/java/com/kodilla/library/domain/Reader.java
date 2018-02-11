@@ -30,11 +30,28 @@ public class Reader {
     @Column(name="createdate")
     private LocalDate createDate;
 
+    @OneToMany(
+            targetEntity = Rent.class,
+            mappedBy = "reader",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
+    private List<Rent> rents = new ArrayList<>();
+
     public Reader (String fname, String sname, LocalDate createDate) {
         this.fname=fname;
         this.sname=sname;
         this.createDate=createDate;
     }
+
+    public Reader (Long id, String fname, String sname, LocalDate createDate) {
+        this.id=id;
+        this.fname=fname;
+        this.sname=sname;
+        this.createDate=createDate;
+    }
+
+
 
     @Override
     public String toString() {

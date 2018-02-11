@@ -44,6 +44,15 @@ public class Title {
         this.publishYear=publishYear;
     }
 
+    public Title (Long id, String title, String author, String publishYear) {
+        this.id=id;
+        this.title=title;
+        this.author=author;
+        this.publishYear=publishYear;
+    }
+
+
+
     @Override
     public String toString() {
         return "Title{" +

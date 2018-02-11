@@ -11,4 +11,7 @@ import javax.transaction.Transactional;
 public interface TitleRepository extends CrudRepository<Title, Long> {
 
     Title findById (Long id);
+
+    @Override
+    Title save (Title title);
 }

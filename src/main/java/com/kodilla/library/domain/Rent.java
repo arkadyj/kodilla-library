@@ -23,10 +23,10 @@ public class Rent {
     private Long id;
 
     @Column(name = "rentDate")
-    private LocalDate rentDate;
+    private String rentDate;
 
     @Column(name = "returnDate")
-    private LocalDate returnDate;
+    private String returnDate;
 
     @ManyToOne
     @JoinColumn(name = "BOOK_ID")
@@ -36,12 +36,12 @@ public class Rent {
     @JoinColumn(name = "READER_ID")
     private Reader reader;
 
-    public Rent(LocalDate rentDate, LocalDate returnDate) {
+    public Rent(String rentDate, String returnDate) {
         this.rentDate = rentDate;
         this.returnDate = returnDate;
     }
 
-    public Rent(long id, LocalDate rentDate, LocalDate returnDate) {
+    public Rent(long id, String rentDate, String returnDate) {
         this.id = id;
         this.rentDate = rentDate;
         this.returnDate = returnDate;

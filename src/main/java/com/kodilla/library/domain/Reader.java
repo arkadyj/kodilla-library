@@ -28,7 +28,7 @@ public class Reader {
     private String sname;
 
     @Column(name="createdate")
-    private LocalDate createDate;
+    private String createDate;
 
     @OneToMany(
             targetEntity = Rent.class,
@@ -38,13 +38,13 @@ public class Reader {
     )
     private List<Rent> rents = new ArrayList<>();
 
-    public Reader (String fname, String sname, LocalDate createDate) {
+    public Reader (String fname, String sname, String createDate) {
         this.fname=fname;
         this.sname=sname;
         this.createDate=createDate;
     }
 
-    public Reader (Long id, String fname, String sname, LocalDate createDate) {
+    public Reader (Long id, String fname, String sname, String createDate) {
         this.id=id;
         this.fname=fname;
         this.sname=sname;

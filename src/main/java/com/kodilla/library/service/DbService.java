@@ -29,6 +29,8 @@ public class DbService {
         return titleRepository.findById(id);
     }
 
+    public Title createTitle(Title title) { return titleRepository.save(title);}
+
     public List<Reader> getAllReaders() {
         return readerRepository.findAll();
     }
@@ -36,6 +38,8 @@ public class DbService {
     public Reader getReader(Long id) {
         return readerRepository.findById(id);
     }
+
+    public Reader createReader (Reader reader) { return readerRepository.save(reader); }
 
     public Book getBook(Long id) {
         return bookRepository.findById(id);

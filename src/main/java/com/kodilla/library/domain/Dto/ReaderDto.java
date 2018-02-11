@@ -1,5 +1,6 @@
 package com.kodilla.library.domain.Dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,7 +14,7 @@ public class ReaderDto {
     private Long id;
     private String fname;
     private String sname;
-    private LocalDate createDate;
+    private String createDate;
 
     @Override
     public String toString() {

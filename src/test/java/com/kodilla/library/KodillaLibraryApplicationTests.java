@@ -37,10 +37,12 @@ public class KodillaLibraryApplicationTests {
 	@Test
 	public void testReaderSave() {
 		//Given
-		Reader reader = new Reader("Dare", "Kozłowski", LocalDate.now());
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		Reader reader = new Reader("Dare", "Kozłowski", LocalDate.now().format(dateFormat));
 		Title title = new Title("Bajki Robotów", "Stanisław Lem", "1955");
 		Book book = new Book("WOLNA");
-		Rent rent = new Rent(LocalDate.now().minusDays(5),LocalDate.now());
+		Rent rent = new Rent(LocalDate.now().minusDays(5).format(dateFormat),LocalDate.now().format(dateFormat));
 		//System.out.println(LocalDate.now());
 		//When
 		// Do testów bazy
@@ -48,7 +50,7 @@ public class KodillaLibraryApplicationTests {
 		titleRepository.save(title);
 
 		//System.out.println(dbService.getTitle(1L));
-		Title title1 = dbService.getTitle(3L);
+		Title title1 = dbService.getTitle(1L);
 		System.out.println(title1);
 
 		title1.getBooks().add(book);
@@ -57,8 +59,8 @@ public class KodillaLibraryApplicationTests {
 
 		readerRepository.save(reader);
 
-		Book book1 = dbService.getBook(3L);
-		Reader reader1 = dbService.getReader(3L);
+		Book book1 = dbService.getBook(1L);
+		Reader reader1 = dbService.getReader(1L);
 
 		reader1.getRents().add(rent);
 		book1.getRents().add(rent);

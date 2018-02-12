@@ -47,15 +47,16 @@ public class KodillaLibraryApplicationTests {
 		//When
 		// Do testów bazy
 
-		titleRepository.save(title);
+		//titleRepository.save(title);
 
 		//System.out.println(dbService.getTitle(1L));
-		Title title1 = dbService.getTitle(1L);
-		System.out.println(title1);
+		//Title title1 = dbService.getTitle(1L);
+		//System.out.println(title1);
 
-		title1.getBooks().add(book);
-		book.setTitle(title1);
-		bookRepository.save(book);
+		title.getBooks().add(book);
+		book.setTitle(title);
+		//bookRepository.save(book);
+		titleRepository.save(title);
 
 		readerRepository.save(reader);
 

@@ -11,4 +11,7 @@ import javax.transaction.Transactional;
 public interface BookRepository extends CrudRepository<Book, Long> {
 
     Book findById(Long id);
+
+    @Override
+    Book save (Book book);
 }

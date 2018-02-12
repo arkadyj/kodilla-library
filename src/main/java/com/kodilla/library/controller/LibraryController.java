@@ -1,14 +1,11 @@
 package com.kodilla.library.controller;
 
 
-import com.kodilla.library.domain.Dto.ReaderDto;
-import com.kodilla.library.domain.Dto.RentDto;
-import com.kodilla.library.domain.Dto.TitleDto;
+import com.kodilla.library.domain.Dto.*;
 import com.kodilla.library.domain.Reader;
 import com.kodilla.library.domain.Rent;
-import com.kodilla.library.mapper.ReaderMapper;
-import com.kodilla.library.mapper.RentMapper;
-import com.kodilla.library.mapper.TitleMapper;
+import com.kodilla.library.domain.Title;
+import com.kodilla.library.mapper.*;
 import com.kodilla.library.repository.TitleRepository;
 import com.kodilla.library.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +31,12 @@ public class LibraryController {
     @Autowired
     private TitleMapper titleMapper;
 
+    @Autowired
+    private BookMapper bookMapper;
+
+    @Autowired
+    private BookWithTitleMapper bookWithTitleMapper;
+
     @RequestMapping(method = RequestMethod.GET, value = "getReaders")
     public List<ReaderDto> getReaders() {
         return readerMapper.mapToListReaderDto(dbService.getAllReaders());
@@ -51,5 +54,20 @@ public class LibraryController {
     @RequestMapping(method = RequestMethod.POST, value = "createTitle", consumes = APPLICATION_JSON_VALUE)
     public void createReader(@RequestBody TitleDto titleDto) {
         dbService.createTitle(titleMapper.mapToTitle(titleDto));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "createBook", consumes = APPLICATION_JSON_VALUE)
+    public void createBook(@RequestBody BookDto bookDto, @RequestParam Long titleId) {
+        dbService.createBook(bookMapper.mapToBook(bookDto), titleId);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "updateBook", consumes = APPLICATION_JSON_VALUE)
+    public void updateBook(@RequestBody BookDto bookDto, Long titleId) {
+        dbService.createBook(bookMapper.mapToBook(bookDto), titleId);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "createBookWithTitle", consumes = APPLICATION_JSON_VALUE)
+    public void createBookWithTitle(@RequestBody BookWithTitleDto bookWithTitleDto) {
+        dbService.createBookWithTitle(bookWithTitleMapper.mapToBookFromDto(bookWithTitleDto),bookWithTitleMapper.mapToTitleFromDto(bookWithTitleDto));
     }
 }

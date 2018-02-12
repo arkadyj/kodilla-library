@@ -40,6 +40,12 @@ public class Book {
         this.status = status;
     }
 
+    public Book(Long id, String status) {
+        this.id = id;
+        this.status = status;
+        //this.title = title;
+    }
+
     @Override
     public String toString() {
         return "Book{" +

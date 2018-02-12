@@ -1,9 +1,8 @@
 package com.kodilla.library.service;
 
-import com.kodilla.library.domain.Book;
-import com.kodilla.library.domain.Reader;
-import com.kodilla.library.domain.Rent;
-import com.kodilla.library.domain.Title;
+import com.kodilla.library.domain.*;
+import com.kodilla.library.domain.Dto.BookWithTitleDto;
+import com.kodilla.library.mapper.BookWithTitleMapper;
 import com.kodilla.library.repository.BookRepository;
 import com.kodilla.library.repository.ReaderRepository;
 import com.kodilla.library.repository.RentRespository;
@@ -44,6 +43,23 @@ public class DbService {
     public Book getBook(Long id) {
         return bookRepository.findById(id);
     }
+
+    public Book createBook(Book book, Long titleId) {
+        Title title = getTitle(titleId);
+        title.getBooks().add(book);
+        book.setTitle(title);
+        return bookRepository.save(book);
+    }
+
+    public Book updateBookStatus(Book book) {
+        return bookRepository.save(book);
+    }
+
+    public Title createBookWithTitle(Book book, Title title) {
+
+        title.getBooks().add(book);
+        book.setTitle(title);
+        return titleRepository.save(title);}
 
     public List<Rent> getRents() {
         return rentRespository.findAll();

@@ -51,8 +51,14 @@ public class DbService {
         return bookRepository.save(book);
     }
 
-    public Book updateBookStatus(Book book) {
+    public Book updateBook(Long titleId, Long bookId, String status) {
+        Book book = bookRepository.findById(bookId);
+        Title title = titleRepository.findById(titleId);
+        book.setStatus(status);
+        book.setTitle(title);
+        title.getBooks().add(book);
         return bookRepository.save(book);
+
     }
 
     public Title createBookWithTitle(Book book, Title title) {

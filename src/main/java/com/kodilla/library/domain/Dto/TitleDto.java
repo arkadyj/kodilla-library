@@ -7,10 +7,19 @@ import lombok.Getter;
 @Getter
 public class TitleDto {
 
-
     private Long id;
     private String title;
     private String author;
     private String publishYear;
 
+
+    @Override
+    public String toString() {
+        return "TitleDto{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", publishYear='" + publishYear + '\'' +
+                '}';
+    }
 }

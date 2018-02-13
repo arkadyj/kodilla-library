@@ -44,28 +44,28 @@ public class LibraryController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "rentBook")
-    public void rentBook(@RequestParam Long bookId, @RequestParam Long readerId) {
-        dbService.rentBook(bookId, readerId);
+    public RentDto rentBook(@RequestParam Long bookId, @RequestParam Long readerId) {
+        return rentMapper.mapToRentDto(dbService.rentBook(bookId, readerId));
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "returnBook")
-    public void rentBook(@RequestParam Long rentId) {
-        dbService.returnBook(rentId);
+    public RentDto rentBook(@RequestParam Long rentId) {
+        return rentMapper.mapToRentDto(dbService.returnBook(rentId));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createReader", consumes = APPLICATION_JSON_VALUE)
-    public void createReader(@RequestBody ReaderDto readerDto) {
-        dbService.createReader(readerMapper.mapToRader(readerDto));
+    public ReaderDto createReader(@RequestBody ReaderDto readerDto) {
+        return readerMapper.mapToReaderDto(dbService.createReader(readerMapper.mapToRader(readerDto)));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createTitle", consumes = APPLICATION_JSON_VALUE)
-    public void createReader(@RequestBody TitleDto titleDto) {
-        dbService.createTitle(titleMapper.mapToTitle(titleDto));
+    public TitleDto createReader(@RequestBody TitleDto titleDto) {
+        return titleMapper.mapToTitleDto(dbService.createTitle(titleMapper.mapToTitle(titleDto)));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createBook", consumes = APPLICATION_JSON_VALUE)
-    public void createBook(@RequestBody BookDto bookDto, @RequestParam Long titleId) {
-        dbService.createBook(bookMapper.mapToBook(bookDto), titleId);
+    public BookDto createBook(@RequestBody BookDto bookDto, @RequestParam Long titleId) {
+        return bookMapper.mapToBookDtoWithTitle(dbService.createBook(bookMapper.mapToBook(bookDto), titleId));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getBooksByStatus")
@@ -74,12 +74,12 @@ public class LibraryController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateBook")
-    public void updateBook2(@RequestParam Long bookId, @RequestParam String status) {
-        dbService.updateBook(bookId, status);
+    public BookDto updateBook(@RequestParam Long bookId, @RequestParam String status) {
+        return bookMapper.mapToBookDtoWithTask(dbService.updateBook(bookId, status));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createBookWithTitle", consumes = APPLICATION_JSON_VALUE)
-    public void createBookWithTitle(@RequestBody BookWithTitleDto bookWithTitleDto) {
-        dbService.createBookWithTitle(bookWithTitleMapper.mapToBookFromDto(bookWithTitleDto), bookWithTitleMapper.mapToTitleFromDto(bookWithTitleDto));
+    public TitleDto createBookWithTitle(@RequestBody BookWithTitleDto bookWithTitleDto) {
+        return titleMapper.mapToTitleDto(dbService.createBookWithTitle(bookWithTitleMapper.mapToBookFromDto(bookWithTitleDto), bookWithTitleMapper.mapToTitleFromDto(bookWithTitleDto)));
     }
 }

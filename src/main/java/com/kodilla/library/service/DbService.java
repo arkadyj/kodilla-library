@@ -2,6 +2,7 @@ package com.kodilla.library.service;
 
 import com.kodilla.library.domain.*;
 import com.kodilla.library.domain.Dto.BookWithTitleDto;
+import com.kodilla.library.domain.Dto.RentDto;
 import com.kodilla.library.mapper.BookWithTitleMapper;
 import com.kodilla.library.repository.BookRepository;
 import com.kodilla.library.repository.ReaderRepository;
@@ -80,7 +81,7 @@ public class DbService {
         return titleRepository.save(title);
     }
 
-    public void rentBook(Long bookId, Long readerId) {
+    public Rent rentBook(Long bookId, Long readerId) {
         Rent rent = new Rent(LocalDate.now().format(dateFormat),null);
         Book book = bookRepository.findById(bookId);
         Reader reader = readerRepository.findById(readerId);
@@ -88,13 +89,13 @@ public class DbService {
         book.getRents().add(rent);
         rent.setBook(book);
         rent.setReader(reader);
-        rentRespository.save(rent);
+        return rentRespository.save(rent);
     }
 
-    public void returnBook(Long rentId) {
+    public Rent returnBook(Long rentId) {
         Rent rent = rentRespository.findById(rentId);
         rent.setReturnDate(LocalDate.now().format(dateFormat));
-        rentRespository.save(rent);
+        return rentRespository.save(rent);
     }
 
     public Rent getRent(Long rentId) {

@@ -26,6 +26,15 @@ public class BookMapper {
         );
     }
 
+    public BookDto mapToBookDtoWithTitle(Book book) {
+        return new BookDto(
+                book.getId(),
+                book.getStatus(),
+                book.getTitle().getId()
+                //book.getTitle()
+        );
+    }
+
     public List<BookDto> mapToListBookDto(List<Book> bookList) {
         return bookList.stream()
                 .map(book -> new BookDto(book.getId(),book.getStatus(),book.getTitle()))

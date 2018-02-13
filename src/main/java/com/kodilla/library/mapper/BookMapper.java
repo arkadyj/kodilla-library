@@ -22,4 +22,13 @@ public class BookMapper {
                 //book.getTitle()
         );
     }
+
+    public BookDto mapToBookDtoWithTask(Book book) {
+        return new BookDto(
+                book.getId(),
+                book.getStatus(),
+                book.getTitle().getId()
+                //book.getTitle()
+        );
+    }
 }

@@ -49,6 +49,19 @@ public class KodillaLibraryApplicationTests {
 
 		//titleRepository.save(title);
 
+		/* ZMIANA STATUSU BOOK
+		Book book1 = dbService.getBook(5L);
+		Title title1 = dbService.getTitle(3L);
+
+		book1.setStatus("ZAJETA");
+
+		book1.setTitle(title1);
+		title1.getBooks().add(book1);
+		bookRepository.save(book1);
+		*/
+
+		/*
+
 		//System.out.println(dbService.getTitle(1L));
 		//Title title1 = dbService.getTitle(1L);
 		//System.out.println(title1);
@@ -70,7 +83,7 @@ public class KodillaLibraryApplicationTests {
 		rentRespository.save(rent);
 
 		System.out.println(reader1.getRents());
-
+		*/
 
 
 		//Book book1 = bookRepository.findById(1L);

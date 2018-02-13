@@ -21,19 +21,14 @@ public class LibraryController {
 
     @Autowired
     private DbService dbService;
-
     @Autowired
     private ReaderMapper readerMapper;
-
     @Autowired
     private RentMapper rentMapper;
-
     @Autowired
     private TitleMapper titleMapper;
-
     @Autowired
     private BookMapper bookMapper;
-
     @Autowired
     private BookWithTitleMapper bookWithTitleMapper;
 

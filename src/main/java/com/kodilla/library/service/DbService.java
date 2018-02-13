@@ -10,6 +10,8 @@ import com.kodilla.library.repository.TitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -23,6 +25,8 @@ public class DbService {
     private TitleRepository titleRepository;
     @Autowired
     private RentRespository rentRespository;
+
+    private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public Title getTitle(Long id) {
         return titleRepository.findById(id);
@@ -50,22 +54,52 @@ public class DbService {
         book.setTitle(title);
         return bookRepository.save(book);
     }
+/*
+    public List<Book> getBooksWithStatus(Long titleId) {
+        return bookRepository.getBooksByStatus(titleId);
+    }
+*/
+    public long getBooksWithStatus (Long titleId, String status) {
+        return bookRepository.countByTitle_IdAndStatus(titleId, status);
 
-    public Book updateBook(Long titleId, Long bookId, String status) {
+    }
+
+    public Book updateBook(Long bookId, String status) {
         Book book = bookRepository.findById(bookId);
-        Title title = titleRepository.findById(titleId);
+        Title title = titleRepository.findById(book.getTitle().getId());
         book.setStatus(status);
         book.setTitle(title);
         title.getBooks().add(book);
         return bookRepository.save(book);
-
     }
 
     public Title createBookWithTitle(Book book, Title title) {
 
         title.getBooks().add(book);
         book.setTitle(title);
-        return titleRepository.save(title);}
+        return titleRepository.save(title);
+    }
+
+    public void rentBook(Long bookId, Long readerId) {
+        Rent rent = new Rent(LocalDate.now().format(dateFormat),null);
+        Book book = bookRepository.findById(bookId);
+        Reader reader = readerRepository.findById(readerId);
+        reader.getRents().add(rent);
+        book.getRents().add(rent);
+        rent.setBook(book);
+        rent.setReader(reader);
+        rentRespository.save(rent);
+    }
+
+    public void returnBook(Long rentId) {
+        Rent rent = rentRespository.findById(rentId);
+        rent.setReturnDate(LocalDate.now().format(dateFormat));
+        rentRespository.save(rent);
+    }
+
+    public Rent getRent(Long rentId) {
+        return rentRespository.findById(rentId);
+    }
 
     public List<Rent> getRents() {
         return rentRespository.findAll();

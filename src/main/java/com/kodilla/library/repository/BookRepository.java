@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 @Repository
@@ -17,6 +18,9 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     @Override
     Book save (Book book);
 
-    @Query(value = "UPDATE book set status=:PARAM2 where id :PARAM1)",nativeQuery = true )
-    Book updateBook(@Param("PARAM1") Long id, @Param("PARAM2") String status);
+    /*
+    @Query(value = "SELECT * from Books WHERE title_id=:PARAM1",nativeQuery = true )
+    List<Book> getBooksByStatus(@Param("PARAM1") Long id);
+    */
+    long countByTitle_IdAndStatus(Long titleId, String status);
 }

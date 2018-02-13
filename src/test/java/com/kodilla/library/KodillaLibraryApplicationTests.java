@@ -49,6 +49,20 @@ public class KodillaLibraryApplicationTests {
 
 		//titleRepository.save(title);
 
+		/* WYPOZYCZENIE KSIAZKI
+		Book book1 = dbService.getBook(5L);
+		Reader reader1 = dbService.getReader(1L);
+
+		reader1.getRents().add(rent);
+		book1.getRents().add(rent);
+		rent.setReader(reader1);
+		rent.setBook(book1);
+		rentRespository.save(rent);
+		*/
+
+
+
+
 		/* ZMIANA STATUSU BOOK
 		Book book1 = dbService.getBook(5L);
 		Title title1 = dbService.getTitle(3L);

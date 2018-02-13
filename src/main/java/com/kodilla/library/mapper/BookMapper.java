@@ -4,6 +4,9 @@ import com.kodilla.library.domain.Book;
 import com.kodilla.library.domain.Dto.BookDto;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class BookMapper {
 
@@ -21,6 +24,13 @@ public class BookMapper {
                 book.getStatus()
                 //book.getTitle()
         );
+    }
+
+    public List<BookDto> mapToListBookDto(List<Book> bookList) {
+        return bookList.stream()
+                .map(book -> new BookDto(book.getId(),book.getStatus(),book.getTitle()))
+                .collect(Collectors.toList());
+
     }
 
     public BookDto mapToBookDtoWithTask(Book book) {

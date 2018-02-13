@@ -1,6 +1,7 @@
 package com.kodilla.library.controller;
 
 
+import com.kodilla.library.domain.Book;
 import com.kodilla.library.domain.Dto.*;
 import com.kodilla.library.domain.Reader;
 import com.kodilla.library.domain.Rent;
@@ -42,6 +43,16 @@ public class LibraryController {
         return rentMapper.mapToListRentDto(dbService.getRents());
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "rentBook")
+    public void rentBook(@RequestParam Long bookId, @RequestParam Long readerId) {
+        dbService.rentBook(bookId, readerId);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "returnBook")
+    public void rentBook(@RequestParam Long rentId) {
+        dbService.returnBook(rentId);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "createReader", consumes = APPLICATION_JSON_VALUE)
     public void createReader(@RequestBody ReaderDto readerDto) {
         dbService.createReader(readerMapper.mapToRader(readerDto));
@@ -57,9 +68,14 @@ public class LibraryController {
         dbService.createBook(bookMapper.mapToBook(bookDto), titleId);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "updateBook2")
-    public void updateBook2(@RequestParam Long titleId,@RequestParam Long bookId,@RequestParam String status) {
-        dbService.updateBook(titleId,bookId,status);
+    @RequestMapping(method = RequestMethod.GET, value = "getBooksByStatus")
+    public long getBooksByStatus(@RequestParam Long titleId, @RequestParam String status) {
+        return dbService.getBooksWithStatus(titleId, status);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "updateBook")
+    public void updateBook2(@RequestParam Long bookId, @RequestParam String status) {
+        dbService.updateBook(bookId, status);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createBookWithTitle", consumes = APPLICATION_JSON_VALUE)

@@ -49,10 +49,15 @@ public class KodillaLibraryApplicationTests {
 
 		//titleRepository.save(title);
 
+
+
+
+
+
 		/* WYPOZYCZENIE KSIAZKI
 		Book book1 = dbService.getBook(5L);
 		Reader reader1 = dbService.getReader(1L);
-
+		book1.setStatus("ZAJETA");
 		reader1.getRents().add(rent);
 		book1.getRents().add(rent);
 		rent.setReader(reader1);

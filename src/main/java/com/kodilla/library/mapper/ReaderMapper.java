@@ -4,11 +4,14 @@ import com.kodilla.library.domain.Dto.ReaderDto;
 import com.kodilla.library.domain.Reader;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class ReaderMapper {
+
 
     public Reader mapToRader(ReaderDto readerDto) {
         return new Reader(

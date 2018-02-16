@@ -85,6 +85,7 @@ public class DbService {
         Rent rent = new Rent(LocalDate.now().format(dateFormat),null);
         Book book = bookRepository.findById(bookId);
         Reader reader = readerRepository.findById(readerId);
+        book.setStatus("ZAJĘTA");
         reader.getRents().add(rent);
         book.getRents().add(rent);
         rent.setBook(book);
@@ -94,6 +95,8 @@ public class DbService {
 
     public Rent returnBook(Long rentId) {
         Rent rent = rentRespository.findById(rentId);
+        Long bookId = rent.getBook().getId();
+        updateBook(bookId,"WOLNA");
         rent.setReturnDate(LocalDate.now().format(dateFormat));
         return rentRespository.save(rent);
     }

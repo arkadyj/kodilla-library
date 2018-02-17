@@ -40,6 +40,7 @@ public class KodillaLibraryApplicationTests {
 		//Rent rent = dbService.getRent(1L);
 		//rentRespository.deleteById(1L);
 		//rentRespository.delete(rent);
+		//rentRepository.deleteAll();
 
 	}
 

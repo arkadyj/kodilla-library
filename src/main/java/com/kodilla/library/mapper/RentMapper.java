@@ -24,6 +24,7 @@ public class RentMapper {
     public RentDto mapToRentDto(Rent rent) {
         return new RentDto(
                 rent.getId(),
+                rent.getBook().getId(),
                 rent.getRentDate(),
                 rent.getReturnDate(),
                 rent.getBook().getTitle().getTitle(),
@@ -36,7 +37,7 @@ public class RentMapper {
 
     public List<RentDto> mapToListRentDto(List<Rent> rentList) {
         return rentList.stream()
-                .map(list -> new RentDto(list.getId(), list.getRentDate(), list.getReturnDate(),
+                .map(list -> new RentDto(list.getId(), list.getBook().getId(), list.getRentDate(), list.getReturnDate(),
                         list.getBook().getTitle().getTitle(),list.getReader().getFname(), list.getReader().getSname()))
                 .collect(Collectors.toList());
     }

@@ -1,14 +1,14 @@
 package com.kodilla.library;
 
-import com.kodilla.library.domain.Book;
 import com.kodilla.library.domain.Reader;
-import com.kodilla.library.domain.Rent;
 import com.kodilla.library.domain.Title;
 import com.kodilla.library.repository.BookRepository;
 import com.kodilla.library.repository.ReaderRepository;
-import com.kodilla.library.repository.RentRespository;
+import com.kodilla.library.repository.RentRepository;
 import com.kodilla.library.repository.TitleRepository;
 import com.kodilla.library.service.DbService;
+import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @RunWith(SpringRunner.class)
@@ -26,28 +25,68 @@ public class KodillaLibraryApplicationTests {
 	@Autowired
 	private BookRepository bookRepository;
 	@Autowired
-	private RentRespository rentRespository;
+	private RentRepository rentRepository;
 	@Autowired
 	private ReaderRepository readerRepository;
 	@Autowired
 	private TitleRepository titleRepository;
 	@Autowired
 	private DbService dbService;
+	DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	@After
+	public void afterTest() {
+		//dbService.deleteRentsAll();
+		//Rent rent = dbService.getRent(1L);
+		//rentRespository.deleteById(1L);
+		//rentRespository.delete(rent);
+
+	}
 
 	@Test
 	public void testReaderSave() {
 		//Given
-		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-		Reader reader = new Reader("Dare", "Kozłowski", LocalDate.now().format(dateFormat));
+		Reader reader = new Reader("Darek", "Kozłowski", LocalDate.now().format(dateFormat));
 		Title title = new Title("Bajki Robotów", "Stanisław Lem", "1955");
-		Book book = new Book("WOLNA");
-		Rent rent = new Rent(LocalDate.now().minusDays(5).format(dateFormat),LocalDate.now().format(dateFormat));
-		//System.out.println(LocalDate.now());
-		//When
-		// Do testów bazy
+		Title title1 = new Title("Problem trzech ciał", "Cixin Liu", "2017");
 
-		//titleRepository.save(title);
+		//When
+		dbService.createReader(reader);
+
+		dbService.createBookWithTitle(title);
+		dbService.createBookWithTitle(title1);
+		dbService.createBook(title1.getId());
+		dbService.rentBook(1L, 1L);
+		dbService.rentBook(3L, 1L);
+		dbService.returnBook(1L);
+
+		long bookCount = dbService.getCountBooksWithStatusByTitle(2L,"FREE");
+		String searchTitle = dbService.getTitle(1L).getTitle();
+		String searchReader = dbService.getReader(1L).getSname();
+
+
+
+		//Then
+		Assert.assertEquals(2,bookCount);
+		Assert.assertEquals("Bajki Robotów",searchTitle);
+		Assert.assertEquals("Kozłowski",searchReader);
+
+
+		//rentRespository.delete(2L);
+		//rentRespository.delete(3L);
+		/*
+		readerRepository.save(reader);
+		book.setTitle(title);
+		title.getBooks().add(book);
+		titleRepository.save(title);
+		reader.getRents().add(rent);
+		book.getRents().add(rent);
+		rent.setReader(reader);
+		rent.setBook(book);
+		rentRespository.save(rent); */
+
+
 
 
 

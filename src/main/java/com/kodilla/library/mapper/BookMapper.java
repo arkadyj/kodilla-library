@@ -25,19 +25,29 @@ public class BookMapper {
                 //book.getTitle()
         );
     }
-
+/*
     public BookDto mapToBookDtoWithTitle(Book book) {
         return new BookDto(
                 book.getId(),
                 book.getStatus(),
-                book.getTitle().getId()
+                book.getTitle()
+                //book.getTitle()
+        );
+    } */
+
+    public BookDto mapToBookDtoWithTitleName(Book book) {
+        return new BookDto(
+                book.getId(),
+                book.getStatus(),
+                book.getTitle().getId(),
+                book.getTitle().getTitle()
                 //book.getTitle()
         );
     }
 
     public List<BookDto> mapToListBookDto(List<Book> bookList) {
         return bookList.stream()
-                .map(book -> new BookDto(book.getId(),book.getStatus(),book.getTitle()))
+                .map(book -> new BookDto(book.getId(),book.getStatus(),book.getTitle().getId(),book.getTitle().getTitle()))
                 .collect(Collectors.toList());
 
     }
@@ -46,8 +56,8 @@ public class BookMapper {
         return new BookDto(
                 book.getId(),
                 book.getStatus(),
-                book.getTitle().getId()
-                //book.getTitle()
+                book.getTitle().getId(),
+                book.getTitle().getTitle()
         );
     }
 }

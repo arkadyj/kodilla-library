@@ -1,6 +1,7 @@
 package com.kodilla.library.repository;
 
 import com.kodilla.library.domain.Book;
+import com.kodilla.library.domain.Dto.BookDto;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -23,4 +24,6 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     List<Book> getBooksByStatus(@Param("PARAM1") Long id);
     */
     long countByTitle_IdAndStatus(Long titleId, String status);
+
+    List<Book> findByTitle_IdAndStatus(Long titleId, String status);
 }

@@ -16,7 +16,7 @@ public class TitleDto {
     @Override
     public String toString() {
         return "TitleDto{" +
-                "id=" + id +
+                "titleId=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", publishYear='" + publishYear + '\'' +

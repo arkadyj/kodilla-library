@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Component
 public class TitleMapper {
 
-    public Title mapToTitle (TitleDto titleDto) {
+    public Title mapToTitle(TitleDto titleDto) {
         return new Title(
                 titleDto.getId(),
                 titleDto.getTitle(),
@@ -30,7 +30,7 @@ public class TitleMapper {
 
     public List<TitleDto> mapToListTitleDto(List<Title> titleList) {
         return titleList.stream()
-                .map(title -> new TitleDto(title.getId(),title.getTitle(),title.getAuthor(),title.getPublishYear()))
+                .map(title -> new TitleDto(title.getId(), title.getTitle(), title.getAuthor(), title.getPublishYear()))
                 .collect(Collectors.toList());
     }
 }

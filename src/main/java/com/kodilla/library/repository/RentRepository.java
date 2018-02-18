@@ -23,13 +23,6 @@ public interface RentRepository extends CrudRepository<Rent, Long> {
     @Query(value = "SELECT * from Rents WHERE book_id=:PARAM1",nativeQuery = true )
     List<Rent> getBookRents(@Param("PARAM1") Long id);
 
-    //List<Rent> findAllByBook_Id(Long id);
-
     @Query(value = "SELECT * from Rents WHERE return_date is null",nativeQuery = true )
     List<Rent> getRentsNotReturn();
-
-    @Query(value = "DELETE FROM RENTS",nativeQuery = true )
-    void truncateRents();
-
-    void deleteById(Long id);
 }

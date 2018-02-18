@@ -30,6 +30,10 @@ public class DbService {
         return titleRepository.findById(id);
     }
 
+    public List<Title> getTitlesByStatus(String status) {
+        return titleRepository.getTitlesByStatus(status);
+    }
+
     public Title createTitle(Title title) { return titleRepository.save(title);}
 
     public List<Reader> getAllReaders() {
@@ -46,6 +50,8 @@ public class DbService {
         return bookRepository.findById(id);
     }
 
+    public Long getBookFirstId() { return bookRepository.getBookFirstId();}
+
     public Book createBook(Long titleId) {
         Book book = new Book(("FREE"));
         Title title = getTitle(titleId);
@@ -53,11 +59,11 @@ public class DbService {
         book.setTitle(title);
         return bookRepository.save(book);
     }
-/*
-    public List<Book> getBooksWithStatus(Long titleId) {
-        return bookRepository.getBooksByStatus(titleId);
+
+    public List<Book> getBooksWithStatus(Long titleId, String status) {
+        return bookRepository.getBooksByStatus(titleId, status);
     }
-*/
+
     public long getCountBooksWithStatusByTitle (Long titleId, String status) {
         return bookRepository.countByTitle_IdAndStatus(titleId, status);
     }
@@ -87,13 +93,12 @@ public class DbService {
             Rent rent = new Rent(LocalDate.now().format(dateFormat), null);
             Book book = bookRepository.findById(bookId);
             Reader reader = readerRepository.findById(readerId);
-            book.setStatus("BORROWED");
+            updateBook(bookId,"BORROWED");
             reader.getRents().add(rent);
             book.getRents().add(rent);
             rent.setBook(book);
             rent.setReader(reader);
             return rentRepository.save(rent);
-
         }
         return new Rent();
     }
@@ -130,14 +135,29 @@ public class DbService {
         return rentRepository.getRentsNotReturn();
     }
 
-    public void deleteRentsAll() {
-       rentRepository.truncateRents();
+    public void deleteRent(Long rentId) {
+        Rent rent = rentRepository.findById(rentId);
+        rent.getReader().getRents().remove(rent);
+        rent.getBook().getRents().remove(rent);
+        rent.setBook(null);
+        rent.setReader(null);
+        rentRepository.save(rent);
+        rentRepository.delete(rentId);
     }
 
-    public void deleteRent(Long id) {
-        rentRepository.deleteById(id);
+    public void deleteBook(Long bookId ) {
+        Book book = bookRepository.findById(bookId);
+        book.getTitle().getBooks().remove(book);
+        book.setTitle(null);
+        bookRepository.save(book);
+        bookRepository.delete(book);
     }
 
+    public void deleteTitle(Long titleId) {
+        titleRepository.delete(titleId);
+    }
 
-
+    public void deleteReader(Long readerId) {
+        readerRepository.delete(readerId);
+    }
 }

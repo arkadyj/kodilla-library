@@ -2,7 +2,6 @@ package com.kodilla.library.mapper;
 
 import com.kodilla.library.domain.Dto.RentDto;
 import com.kodilla.library.domain.Rent;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,8 +15,6 @@ public class RentMapper {
                 rentDto.getId(),
                 rentDto.getRentDate(),
                 rentDto.getReturnDate()
-                //rentDto.getBook(),
-                //rentDto.getReader()
         );
     }
 
@@ -30,15 +27,13 @@ public class RentMapper {
                 rent.getBook().getTitle().getTitle(),
                 rent.getReader().getFname(),
                 rent.getReader().getSname()
-                //rent.getBook(),
-                //rent.getReader()
         );
     }
 
     public List<RentDto> mapToListRentDto(List<Rent> rentList) {
         return rentList.stream()
                 .map(list -> new RentDto(list.getId(), list.getBook().getId(), list.getRentDate(), list.getReturnDate(),
-                        list.getBook().getTitle().getTitle(),list.getReader().getFname(), list.getReader().getSname()))
+                        list.getBook().getTitle().getTitle(), list.getReader().getFname(), list.getReader().getSname()))
                 .collect(Collectors.toList());
     }
 }

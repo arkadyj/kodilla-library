@@ -83,14 +83,14 @@ public class LibraryController {
 
     @RequestMapping(method = RequestMethod.POST, value = "rentBook")
     public ResponseEntity<RentDto> rentBook(@RequestParam Long bookId, @RequestParam Long readerId) {
-       RentDto rentDto;
-       try {
-           rentDto = rentMapper.mapToRentDto(dbService.rentBook(bookId, readerId));
-       } catch (Exception e) {
-           LOGGER.error("ERROR during rent process - bookId: " + bookId + " readerId: " + readerId);
-           return new ResponseEntity<RentDto>(HttpStatus.NOT_FOUND);
-       }
-        return new ResponseEntity<RentDto>(rentDto,HttpStatus.OK);
+        RentDto rentDto;
+        try {
+            rentDto = rentMapper.mapToRentDto(dbService.rentBook(bookId, readerId));
+        } catch (Exception e) {
+            LOGGER.error("ERROR during rent process - bookId: " + bookId + " readerId: " + readerId);
+            return new ResponseEntity<RentDto>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<RentDto>(rentDto, HttpStatus.OK);
 
     }
 
@@ -103,7 +103,7 @@ public class LibraryController {
             LOGGER.error("ERROR during returning book - rentId: " + rentId);
             return new ResponseEntity<RentDto>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<RentDto>(rentDto,HttpStatus.OK);
+        return new ResponseEntity<RentDto>(rentDto, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createReader", consumes = APPLICATION_JSON_VALUE)
@@ -125,7 +125,7 @@ public class LibraryController {
             LOGGER.error("ERROR during creating new book. Titleid: " + titleId);
             return new ResponseEntity<BookDto>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<BookDto>(bookDto1,HttpStatus.OK);
+        return new ResponseEntity<BookDto>(bookDto1, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getCountBooksByStatus")
@@ -136,6 +136,11 @@ public class LibraryController {
     @RequestMapping(method = RequestMethod.GET, value = "getBooksByStatus")
     public List<BookDto> getBooksByStatus(@RequestParam Long titleId, @RequestParam String status) {
         return bookMapper.mapToListBookDto(dbService.getBooksByStatus(titleId, status));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getTitlesByStatus")
+    public List<TitleDto> getTitlesByStatus(@RequestParam String status) {
+        return titleMapper.mapToListTitleDto(dbService.getTitlesByStatus(status));
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateBook")
@@ -160,21 +165,6 @@ public class LibraryController {
             LOGGER.error("ERROR during creating book and title. Data: " + titleDto);
             return new ResponseEntity<TitleDto>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<TitleDto>(titleDto1,HttpStatus.OK);
+        return new ResponseEntity<TitleDto>(titleDto1, HttpStatus.OK);
     }
-
-
-/*
-    @RequestMapping(method = RequestMethod.POST, value = "createBookWithTitle", consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<TitleDto> createBookWithTitle(@RequestBody BookWithTitleDto bookWithTitleDto) {
-        TitleDto titleDto;
-        try {
-            titleDto = titleMapper.mapToTitleDto(
-                    dbService.createBookWithTitle(bookWithTitleMapper.mapToBookFromDto(bookWithTitleDto), bookWithTitleMapper.mapToTitleFromDto(bookWithTitleDto)));
-        } catch (Exception e) {
-            LOGGER.error("ERROR during creating book and title. Data: " + bookWithTitleDto);
-            return new ResponseEntity<TitleDto>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<TitleDto>(titleDto,HttpStatus.OK);
-    } */
 }

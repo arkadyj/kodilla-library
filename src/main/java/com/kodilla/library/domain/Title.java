@@ -27,7 +27,7 @@ public class Title {
     @Column(name = "author")
     private String author;
 
-    @Column(name="publishYear")
+    @Column(name = "publishYear")
     private String publishYear;
 
     @OneToMany(
@@ -38,19 +38,18 @@ public class Title {
     )
     private List<Book> books = new ArrayList<>();
 
-    public Title (String title, String author, String publishYear) {
-        this.title=title;
-        this.author=author;
-        this.publishYear=publishYear;
+    public Title(String title, String author, String publishYear) {
+        this.title = title;
+        this.author = author;
+        this.publishYear = publishYear;
     }
 
-    public Title (Long id, String title, String author, String publishYear) {
-        this.id=id;
-        this.title=title;
-        this.author=author;
-        this.publishYear=publishYear;
+    public Title(Long id, String title, String author, String publishYear) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.publishYear = publishYear;
     }
-
 
 
     @Override

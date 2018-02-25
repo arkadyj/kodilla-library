@@ -1,8 +1,6 @@
 package com.kodilla.library.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,7 +8,9 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Getter
+@Setter
 @Entity
 @Table(name = "READERS")
 public class Reader {
@@ -25,6 +25,9 @@ public class Reader {
     @Column(name = "sname")
     private String sname;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "createdate")
     private String createDate;
 
@@ -36,28 +39,19 @@ public class Reader {
     )
     private List<Rent> rents = new ArrayList<>();
 
-    public Reader(String fname, String sname, String createDate) {
+    public Reader(String fname, String sname, String email, String createDate) {
 
         this.fname = fname;
         this.sname = sname;
+        this.email = email;
         this.createDate = createDate;
     }
 
-    public Reader(Long id, String fname, String sname, String createDate) {
+    public Reader(Long id, String fname, String sname, String email, String createDate) {
         this.id = id;
         this.fname = fname;
         this.sname = sname;
+        this.email = email;
         this.createDate = createDate;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Reader{" +
-                "id=" + id +
-                ", fname='" + fname + '\'' +
-                ", sname='" + sname + '\'' +
-                ", createDate=" + createDate +
-                '}';
     }
 }

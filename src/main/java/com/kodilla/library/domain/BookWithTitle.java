@@ -1,10 +1,10 @@
 package com.kodilla.library.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
 @AllArgsConstructor
-@Getter
+@NoArgsConstructor
+@Data
 public class BookWithTitle {
 
     private Long idTitle;

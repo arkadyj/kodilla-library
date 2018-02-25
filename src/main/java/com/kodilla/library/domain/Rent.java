@@ -1,9 +1,6 @@
 package com.kodilla.library.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,6 +9,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Getter
 @Setter
 @Entity
@@ -45,16 +43,5 @@ public class Rent {
         this.id = id;
         this.rentDate = rentDate;
         this.returnDate = returnDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Rent{" +
-                "id=" + id +
-                ", rentDate=" + rentDate +
-                ", returnDate=" + returnDate +
-                ", book=" + book +
-                ", reader=" + reader +
-                '}'+"\n";
     }
 }

@@ -1,10 +1,10 @@
 package com.kodilla.library.domain.Dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
 @AllArgsConstructor
-@Getter
+@NoArgsConstructor
+@Data
 public class TitleDto {
 
     private Long id;
@@ -13,7 +13,7 @@ public class TitleDto {
     private String publishYear;
 
 
-    @Override
+    /*@Override
     public String toString() {
         return "TitleDto{" +
                 "titleId=" + id +
@@ -21,5 +21,5 @@ public class TitleDto {
                 ", author='" + author + '\'' +
                 ", publishYear='" + publishYear + '\'' +
                 '}';
-    }
+    }*/
 }

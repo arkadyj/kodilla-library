@@ -2,6 +2,7 @@ package com.kodilla.library.mapper;
 
 import com.kodilla.library.domain.Dto.ReaderDto;
 import com.kodilla.library.domain.Reader;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -12,28 +13,21 @@ import java.util.stream.Collectors;
 @Component
 public class ReaderMapper {
 
+    private static final ModelMapper modelMapper = new ModelMapper();
 
-    public Reader mapToRader(ReaderDto readerDto) {
-        return new Reader(
-                readerDto.getId(),
-                readerDto.getFname(),
-                readerDto.getSname(),
-                readerDto.getCreateDate()
-        );
+    public Reader mapToReader(ReaderDto readerDto) {
+        Reader reader = modelMapper.map(readerDto, Reader.class);
+        return reader;
     }
 
     public ReaderDto mapToReaderDto(Reader reader) {
-        return new ReaderDto(
-                reader.getId(),
-                reader.getFname(),
-                reader.getSname(),
-                reader.getCreateDate()
-        );
+        ReaderDto readerDto = modelMapper.map(reader, ReaderDto.class);
+        return readerDto;
     }
 
     public List<ReaderDto> mapToListReaderDto(final List<Reader> list) {
         return list.stream()
-                .map(t -> new ReaderDto(t.getId(), t.getFname(), t.getSname(), t.getCreateDate()))
+                .map(reader -> modelMapper.map(reader, ReaderDto.class))
                 .collect(Collectors.toList());
     }
 }

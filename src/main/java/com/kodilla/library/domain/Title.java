@@ -1,9 +1,6 @@
 package com.kodilla.library.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +8,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Getter
 @Setter
 @Entity
@@ -52,7 +50,7 @@ public class Title {
     }
 
 
-    @Override
+    /*@Override
     public String toString() {
         return "Title{" +
                 "id=" + id +
@@ -61,5 +59,5 @@ public class Title {
                 ", publishYear='" + publishYear + '\'' +
                 ", books=" + books +
                 '}';
-    }
+    }*/
 }

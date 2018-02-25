@@ -25,7 +25,7 @@ public class KodillaLibraryApplicationTests {
     public void testReaderSave() {
         //Given
 
-        Reader reader = new Reader("Darek", "Kozłowski", LocalDate.now().format(dateFormat));
+        Reader reader = new Reader("Darek", "Kozłowski", "szelaga@gmail.com", LocalDate.now().format(dateFormat));
         Title title = new Title("Bajki Robotów", "Stanisław Lem", "1955");
         Title title1 = new Title("Problem trzech ciał", "Cixin Liu", "2017");
 

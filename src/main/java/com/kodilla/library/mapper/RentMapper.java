@@ -30,27 +30,6 @@ public class RentMapper {
         }
     };
 
-    PropertyMap<Rent, RentDto> rentMap1 = new PropertyMap<Rent, RentDto>() {
-        @Override
-        protected void configure() {
-            map(source.getId(), destination.getId());
-            map(source.getBook().getId(), destination.getBookId());
-            map(source.getRentDate(), destination.getRentDate());
-            map(source.getReturnDate(), destination.getReturnDate());
-            map(source.getBook().getTitle().getTitle(), destination.getBookTitle());
-            map(source.getReader().getFname(), destination.getReaderFirstName());
-            map(source.getReader().getSname(), destination.getReaderSecondName());
-        }
-    };
-
-    public Rent mapToRent(RentDto rentDto) {
-        return new Rent(
-                rentDto.getId(),
-                rentDto.getRentDate(),
-                rentDto.getReturnDate()
-        );
-    }
-
     public RentDto mapToRentDto(Rent rent) {
         return modelMapper.map(rent, RentDto.class);
     }

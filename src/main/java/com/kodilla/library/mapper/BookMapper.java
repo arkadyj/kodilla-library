@@ -27,20 +27,6 @@ public class BookMapper {
         }
     };
 
-    public Book mapToBook(BookDto bookDto) {
-        return new Book(
-                bookDto.getId(),
-                bookDto.getStatus()
-        );
-    }
-
-    public BookDto mapToBookDto(Book book) {
-        return new BookDto(
-                book.getId(),
-                book.getStatus()
-        );
-    }
-
     public BookDto mapToBookDtoWithTitleName(Book book) {
         return modelMapper.map(book, BookDto.class);
     }

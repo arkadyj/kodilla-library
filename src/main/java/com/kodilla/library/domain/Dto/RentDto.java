@@ -5,8 +5,6 @@ import com.kodilla.library.domain.Reader;
 import lombok.*;
 
 @Data
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RentDto {

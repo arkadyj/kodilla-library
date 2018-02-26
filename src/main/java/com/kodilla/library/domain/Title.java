@@ -9,8 +9,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Getter
-@Setter
 @Entity
 @Table(name = "TITLES")
 public class Title {
@@ -48,16 +46,4 @@ public class Title {
         this.author = author;
         this.publishYear = publishYear;
     }
-
-
-    /*@Override
-    public String toString() {
-        return "Title{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", publishYear='" + publishYear + '\'' +
-                ", books=" + books +
-                '}';
-    }*/
 }

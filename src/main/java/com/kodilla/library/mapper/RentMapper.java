@@ -35,7 +35,6 @@ public class RentMapper {
     }
 
     public List<RentDto> mapToListRentDto(List<Rent> rentList) {
-
         return rentList.stream()
                 .map(rent -> modelMapper.map(rent, RentDto.class))
                 .collect(Collectors.toList());

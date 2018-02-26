@@ -12,6 +12,7 @@ import com.kodilla.library.mapper.ReaderMapper;
 import com.kodilla.library.mapper.RentMapper;
 import com.kodilla.library.mapper.TitleMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class LibraryService {
 
     private final MailService mailService;
@@ -30,8 +32,6 @@ public class LibraryService {
     private final ReaderMapper readerMapper;
     private final TitleMapper titleMapper;
     private final BookMapper bookMapper;
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(LibraryService.class);
 
     public List<ReaderDto> getReaders() {
         return readerMapper.mapToListReaderDto(dbService.getAllReaders());
@@ -51,7 +51,7 @@ public class LibraryService {
             rentDtoList = rentMapper.mapToListRentDto(dbService.getRentsByBook(bookId));
 
         } catch (Exception e) {
-            LOGGER.error("ERROR in retrieving rent list for bookId: " + bookId);
+            log.error("ERROR in retrieving rent list for bookId: " + bookId);
             return new ResponseEntity<List<RentDto>>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<List<RentDto>>(rentDtoList, HttpStatus.OK);
@@ -62,7 +62,7 @@ public class LibraryService {
         try {
             rentDtoList = rentMapper.mapToListRentDto(dbService.getRentsNotReturn());
         } catch (Exception e) {
-            LOGGER.error("ERROR in retrieving rent list where return date is null");
+            log.error("ERROR in retrieving rent list where return date is null");
             return new ResponseEntity<List<RentDto>>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<List<RentDto>>(rentDtoList, HttpStatus.OK);
@@ -93,7 +93,7 @@ public class LibraryService {
         try {
             bookDto1 = bookMapper.mapToBookDtoWithTitleName(dbService.createBook(titleId));
         } catch (Exception e) {
-            LOGGER.error("ERROR during creating new book. Titleid: " + titleId);
+            log.error("ERROR during creating new book. Titleid: " + titleId);
             return new ResponseEntity<BookDto>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<BookDto>(bookDto1, HttpStatus.OK);
@@ -105,7 +105,7 @@ public class LibraryService {
             titleDto1 = titleMapper.mapToTitleDto(
                     dbService.createBookWithTitle(titleMapper.mapToTitle(titleDto)));
         } catch (Exception e) {
-            LOGGER.error("ERROR during creating book and title. Data: " + titleDto);
+            log.error("ERROR during creating book and title. Data: " + titleDto);
             return new ResponseEntity<TitleDto>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<TitleDto>(titleDto1, HttpStatus.OK);
@@ -116,7 +116,7 @@ public class LibraryService {
         try {
             rentDto = rentMapper.mapToRentDto(dbService.rentBook(bookId, readerId));
         } catch (Exception e) {
-            LOGGER.error("ERROR during rent process - bookId: " + bookId + " readerId: " + readerId);
+            log.error("ERROR during rent process - bookId: " + bookId + " readerId: " + readerId);
             return new ResponseEntity<RentDto>(HttpStatus.NOT_FOUND);
         }
         Reader reader = dbService.getReader(readerId);
@@ -135,7 +135,7 @@ public class LibraryService {
         try {
             rentDto = rentMapper.mapToRentDto(dbService.returnBook(rentId));
         } catch (Exception e) {
-            LOGGER.error("ERROR during returning book - rentId: " + rentId);
+            log.error("ERROR during returning book - rentId: " + rentId);
             return new ResponseEntity<RentDto>(HttpStatus.NOT_FOUND);
         }
         Reader reader = dbService.getRent(rentId).getReader();
@@ -154,7 +154,7 @@ public class LibraryService {
         try {
             bookDto = bookMapper.mapToBookDtoWithTask(dbService.updateBook(bookId, status));
         } catch (Exception e) {
-            LOGGER.error("ERROR during updating book status. bookId: " + bookId + " status: " + status);
+            log.error("ERROR during updating book status. bookId: " + bookId + " status: " + status);
             return new ResponseEntity<BookDto>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<BookDto>(bookDto, HttpStatus.OK);
